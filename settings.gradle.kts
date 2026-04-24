@@ -21,7 +21,15 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-
+private fun subprojects(path: String) =
+    file(path)
+        .listFiles()
+        .filter {
+            it.isDirectory && it.listFiles().any { file -> file.name == "build.gradle.kts" }
+        }.map {
+            "${path.replace('/', ':')}:${it.name}"
+        }
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "Synapse"
 include(":app")
- 
+include(subprojects("login"))

@@ -1,58 +1,65 @@
+import com.android.build.gradle.internal.api.ApkVariantOutputImpl
+import convention.SynapseBuildType
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.compose)
+    libs.plugins.run {
+        alias(application)
+        alias(application.compose)
+        alias(firebase)
+        alias(di)
+        alias(kotlinx.serialization)
+    }
 }
-
 android {
-    namespace = "ir.rahim.synapse"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
+    val keystorePropertiesFile = rootProject.file("local.properties")
+    val keystoreProperties = Properties()
+    if (keystorePropertiesFile.exists()) {
+        keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    }
+
+    signingConfigs {
+//        create("release") {
+//            storeFile = rootProject.file("synapseKst.jks")
+//            storePassword = keystoreProperties.getProperty("storePassword")
+//            keyAlias = keystoreProperties.getProperty("keyAlias")
+//            keyPassword = keystoreProperties.getProperty("keyPassword")
+//        }
+    }
+    androidComponents {
+        onVariants{
+            it.outputs.forEach { output ->
+                if (output is ApkVariantOutputImpl) {
+                    output.outputFileName = "synapse.apk"
+                }
+            }
         }
     }
 
-    defaultConfig {
-        applicationId = "ir.rahim.synapse"
-        minSdk = 28
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
     buildFeatures {
-        compose = true
+        buildConfig = true
+    }
+    buildTypes {
+        debug {
+            applicationIdSuffix = SynapseBuildType.DEBUG.applicationIdSuffix
+        }
+//        release {
+//            isMinifyEnabled = true
+//            isShrinkResources = true
+//            applicationIdSuffix = SynapseBuildType.RELEASE.applicationIdSuffix
+//            proguardFiles(
+//                getDefaultProguardFile("proguard-android-optimize.txt"),
+//                "proguard-rules.pro",
+//            )
+//            signingConfig = signingConfigs.getByName("release")
+//        }
     }
 }
-
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    testImplementation(libs.junit)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.androidx.junit)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
-    debugImplementation(libs.androidx.compose.ui.tooling)
+    libs.run {
+        implementation(androidx.constraintlayout)
+        implementation(kotlinx.collections.immutable)
+//        implementation(accompanist.permissions)
+    }
 }

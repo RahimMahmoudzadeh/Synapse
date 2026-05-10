@@ -32,5 +32,7 @@ private fun subprojects(path: String) =
         }
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "Synapse"
+
 include(":app")
 include(subprojects("login"))
+include(subprojects("library"))

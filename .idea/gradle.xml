@@ -26,6 +26,7 @@
             <option value="$PROJECT_DIR$/build-logic/convention" />
             <option value="$PROJECT_DIR$/library" />
             <option value="$PROJECT_DIR$/library/designsystem" />
+            <option value="$PROJECT_DIR$/library/navigation" />
             <option value="$PROJECT_DIR$/login" />
             <option value="$PROJECT_DIR$/login/data" />
             <option value="$PROJECT_DIR$/login/domain" />

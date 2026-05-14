@@ -143,6 +143,7 @@ di = { id = "di", version = "unspecified" }
 library = { id = "library", version = "unspecified" }
 library-compose = { id = "library.compose", version = "unspecified" }
 db = { id = "db", version = "unspecified" }
+navigation = { id = "navigation", version = "unspecified" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 
 [bundles]

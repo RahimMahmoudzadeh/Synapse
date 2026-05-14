@@ -62,5 +62,9 @@ gradlePlugin {
       id = "firebase"
       implementationClass = "plugins.FirebaseConventionPlugin"
     }
+    register("navigation") {
+      id = "navigation"
+      implementationClass = "plugins.NavigationConventionPlugin"
+    }
   }
 }

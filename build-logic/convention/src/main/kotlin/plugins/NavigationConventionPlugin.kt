@@ -10,7 +10,7 @@ class NavigationConventionPlugin : Plugin<Project> {
     with(target) {
 
       dependencies {
-        add("implementation", versionCatalog.findBundle("navigation").get())
+        add("api", versionCatalog.findBundle("navigation").get())
       }
     }
   }

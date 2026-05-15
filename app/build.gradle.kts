@@ -60,6 +60,5 @@ dependencies {
     libs.run {
         implementation(androidx.constraintlayout)
         implementation(kotlinx.collections.immutable)
-//        implementation(accompanist.permissions)
     }
 }

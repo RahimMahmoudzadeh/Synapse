@@ -1,4 +1,4 @@
-package ir.rahim.synapse.ui.theme
+package ir.rahim.library.designsystem.utils.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -36,3 +36,4 @@ rootProject.name = "Synapse"
 include(":app")
 include(subprojects("login"))
 include(subprojects("library"))
+include(":shared")

@@ -1,7 +1,6 @@
-package ir.rahim.synapse
+package ir.rahim.synapse.ui.main
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -12,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import ir.rahim.synapse.ui.theme.SynapseTheme
+import ir.rahim.library.designsystem.utils.theme.SynapseTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

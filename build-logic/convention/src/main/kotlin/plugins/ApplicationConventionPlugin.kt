@@ -19,6 +19,7 @@ class ApplicationConventionPlugin : Plugin<Project> {
         listOf(
           "com.android.application",
           versionCatalog.findPlugin("kotlin-parcelize").get().get().pluginId,
+          versionCatalog.findPlugin("androidMultiplatformLibrary").get().get().pluginId,
         )
       }
       applicationGradle {
@@ -38,18 +39,8 @@ class ApplicationConventionPlugin : Plugin<Project> {
           .rootProject
           .subprojects
 
-//        subprojects.filter { it.path.startsWith(":feature:", false) }
-//          .forEach { add("implementation", project(it.path)) }
-//        subprojects.filter { it.path.startsWith(":home:", false) }
-//          .forEach { add("implementation", project(it.path)) }
-//        subprojects.filter { it.path.startsWith(":onboarding:", false) }
-//          .forEach { add("implementation", project(it.path)) }
-//        subprojects.filter { it.path.startsWith(":note:", false) }
-//          .forEach { add("implementation", project(it.path)) }
         subprojects.filter { it.path.startsWith(":library:", false) }
           .forEach { add("implementation", project(it.path)) }
-//        subprojects.filter { it.path.startsWith(":core:", false) }
-//          .forEach { add("implementation", project(it.path)) }
       }
     }
   }

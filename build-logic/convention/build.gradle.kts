@@ -66,5 +66,9 @@ gradlePlugin {
       id = "navigation"
       implementationClass = "plugins.NavigationConventionPlugin"
     }
+    register("cmpLibrary") {
+      id = "cmp.library"
+      implementationClass = "plugins.CmpLibraryConventionPlugin"
+    }
   }
 }

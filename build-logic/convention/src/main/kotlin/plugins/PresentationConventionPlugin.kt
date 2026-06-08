@@ -16,7 +16,7 @@ class PresentationConventionPlugin : Plugin<Project> {
         add("implementation", versionCatalog.findLibrary("androidx.tracing.ktx").get())
         add("api", project(":library:designsystem"))
         add("api", project(":library:navigation"))
-        add("api", project(":core:base"))
+//        add("api", project(":core:base"))
       }
     }
   }

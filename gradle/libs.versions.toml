@@ -156,7 +156,7 @@ library = { id = "library", version = "unspecified" }
 library-compose = { id = "library.compose", version = "unspecified" }
 db = { id = "db", version = "unspecified" }
 navigation = { id = "navigation", version = "unspecified" }
-cmp-library = { id = "cmp.library", version = "unspecified" }
+cmpLibrary = { id = "cmp.library", version = "unspecified" }
 
 
 [bundles]

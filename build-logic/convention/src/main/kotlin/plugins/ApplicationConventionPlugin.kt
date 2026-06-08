@@ -19,7 +19,6 @@ class ApplicationConventionPlugin : Plugin<Project> {
         listOf(
           "com.android.application",
           versionCatalog.findPlugin("kotlin-parcelize").get().get().pluginId,
-          versionCatalog.findPlugin("androidMultiplatformLibrary").get().get().pluginId,
         )
       }
       applicationGradle {

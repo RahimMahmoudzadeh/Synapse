@@ -1,57 +1,57 @@
 package plugins
 
 import com.android.build.api.dsl.LibraryExtension
+import config.Config
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.internal.Actions.with
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.getByType
-import org.jetbrains.compose.ComposeExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import versionCatalog
 
 class CmpLibraryConventionPlugin : Plugin<Project> {
-    override fun apply(target: Project) = with(target) {
-        pluginManager.apply("org.jetbrains.kotlin.multiplatform")
-        pluginManager.apply("com.android.library")
-        pluginManager.apply("org.jetbrains.compose")
+    override fun apply(target: Project) {
+        with(target) {
+            with(pluginManager) {
+                apply(versionCatalog.findPlugin("kotlin.multiplatform").get().get().pluginId)
+                apply(
+                    versionCatalog.findPlugin("android.kotlin.multiplatform.library").get()
+                        .get().pluginId
+                )
+                apply(versionCatalog.findPlugin("kotlinx.serialization").get().get().pluginId)
+            }
+            extensions.configure<KotlinMultiplatformExtension> {
+                androidTarget {
+                    compilerOptions {
+                        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+                    }
+                }
 
-        val libs = extensions.getByType<org.gradle.api.artifacts.VersionCatalog>()
+                iosX64()
+                iosArm64()
+                iosSimulatorArm64()
 
-        extensions.configure<KotlinMultiplatformExtension> {
-            androidTarget {
-                compilerOptions {
-                    jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+                applyDefaultHierarchyTemplate()
+
+                sourceSets.apply {
+                    commonMain.dependencies {
+                        implementation(versionCatalog.findLibrary("kotlin-stdlib"))
+                    }
+                    androidMain.dependencies {
+                    }
                 }
             }
 
-            iosX64()
-            iosArm64()
-            iosSimulatorArm64()
-
-            applyDefaultHierarchyTemplate()
-
-            sourceSets.apply {
-                commonMain.dependencies {
-                    implementation(compose.runtime)
-                    implementation(compose.foundation)
-                    implementation(compose.material3)
-                    implementation(compose.components.resources)
-                    implementation(compose.components.uiToolingPreview)
+            extensions.configure<LibraryExtension> {
+                compileSdk = Config.android.compileSdkVersion
+                defaultConfig {
+                    minSdk = Config.android.minSdkVersion
                 }
-                androidMain.dependencies {
-                    implementation(libs.findLibrary("androidx.activity.compose").get())
+                compileOptions {
+                    sourceCompatibility = JavaVersion.VERSION_17
+                    targetCompatibility = JavaVersion.VERSION_17
                 }
-            }
-        }
-
-        extensions.configure<LibraryExtension> {
-            compileSdk = libs.findVersion("android-compileSdk").get().requiredVersion.toInt()
-            defaultConfig {
-                minSdk = libs.findVersion("android-minSdk").get().requiredVersion.toInt()
-            }
-            compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_17
-                targetCompatibility = JavaVersion.VERSION_17
             }
         }
     }

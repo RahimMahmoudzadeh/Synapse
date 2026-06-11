@@ -5,7 +5,7 @@ plugins {
 //    alias(libs.plugins.android.lint) apply false
     libs.plugins.run {
         alias(androidApplication) apply false
-        alias(com.android.library) apply false
+        alias(android.kotlin.multiplatform.library ) apply false
         alias(ksp) apply false
         alias(kotlin.parcelize) apply false
         alias(google.services) apply false

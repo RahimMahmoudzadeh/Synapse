@@ -18,12 +18,8 @@ internal fun Project.configureAndroidCompose(commonExtension: ApplicationExtensi
     }
 
     dependencies {
-      val bom = versionCatalog.findLibrary("androidx-compose-bom").get()
       val compose = versionCatalog.findBundle("compose").get()
-      add("implementation", platform(bom))
       add("implementation", compose)
-      add("androidTestImplementation", platform(bom))
-      add("implementation", versionCatalog.findLibrary("ui-tooling").get())
     }
 
     testOptions {
@@ -41,12 +37,8 @@ internal fun Project.configureAndroidCompose(commonExtension: LibraryExtension) 
     }
 
     dependencies {
-      val bom = versionCatalog.findLibrary("androidx-compose-bom").get()
       val compose = versionCatalog.findBundle("compose").get()
-      add("implementation", platform(bom))
       add("implementation", compose)
-      add("androidTestImplementation", platform(bom))
-      add("implementation", versionCatalog.findLibrary("ui-tooling").get())
     }
 
     testOptions {

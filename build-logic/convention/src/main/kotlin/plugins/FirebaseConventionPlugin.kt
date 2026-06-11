@@ -8,15 +8,15 @@ import versionCatalog
 
 class FirebaseConventionPlugin : Plugin<Project> {
   override fun apply(target: Project) {
-    with(target) {
-      applyPlugins {
-        listOf(
-          "com.google.gms.google-services",
-          "com.google.firebase.crashlytics",
-        )
-      }
-      applyDependencies()
-    }
+//    with(target) {
+//      applyPlugins {
+//        listOf(
+//          "com.google.gms.google-services",
+//          "com.google.firebase.crashlytics",
+//        )
+//      }
+//      applyDependencies()
+//    }
   }
 
   private fun Project.applyDependencies() {

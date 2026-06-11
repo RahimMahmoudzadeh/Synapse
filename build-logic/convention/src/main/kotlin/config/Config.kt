@@ -5,17 +5,12 @@ import org.gradle.api.JavaVersion
 object Config {
   val android = AndroidConfig(
     minSdkVersion = 26,
-    targetSdkVersion = 36,
-    compileSdkVersion = 36,
-    applicationId = "com.rahim",
-    versionCode = 137,
-    versionName = "1.6.7",
-    nameSpace = "com.rahim",
-    versionNameSuffixCafeBazaar = "-c",
-    versionNameSuffixGooglePlay = "-g",
-    versionNameSuffixMyket = "-m",
-    applicationIdSuffix = ".synapse",
-    dimension = "rahim",
+    targetSdkVersion = 37,
+    compileSdkVersion = 37,
+    applicationId = "ir.rahim.synapse",
+    versionCode = 1,
+    versionName = "1.0.0",
+    nameSpace = "ir.rahim.synapse",
   )
   val jvm = JvmConfig(
     javaVersion = JavaVersion.VERSION_17,
@@ -31,11 +26,6 @@ data class AndroidConfig(
   val versionCode: Int,
   val versionName: String,
   val nameSpace: String,
-  val versionNameSuffixCafeBazaar: String,
-  val versionNameSuffixMyket: String,
-  val versionNameSuffixGooglePlay: String,
-  val applicationIdSuffix: String,
-  val dimension: String,
 )
 data class JvmConfig(
   val javaVersion: JavaVersion,

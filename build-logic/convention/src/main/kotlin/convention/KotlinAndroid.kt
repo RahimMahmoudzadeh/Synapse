@@ -25,17 +25,6 @@ internal fun Project.configureKotlinAndroid(commonExtension: ApplicationExtensio
       isCoreLibraryDesugaringEnabled = true
     }
     packaging.resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
-
-//    configure<KotlinAndroidProjectExtension> {
-//
-//      compilerOptions.apply {
-//        val warningsAsErrors: String? by project
-//        allWarningsAsErrors.set(warningsAsErrors.toBoolean())
-//        jvmTarget.set(JvmTarget.JVM_17)
-//        freeCompilerArgs.add("-Xexplicit-backing-fields")
-//        freeCompilerArgs.addAll(Config.jvm.freeCompilerArgs)
-//      }
-//    }
   }
 
   dependencies {
@@ -57,17 +46,6 @@ internal fun Project.configureKotlinAndroid(commonExtension: LibraryExtension) {
       isCoreLibraryDesugaringEnabled = true
     }
     packaging.resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
-
-//    configure<KotlinAndroidProjectExtension> {
-//
-//      compilerOptions.apply {
-//        val warningsAsErrors: String? by project
-//        allWarningsAsErrors.set(warningsAsErrors.toBoolean())
-//        jvmTarget.set(JvmTarget.JVM_17)
-//        freeCompilerArgs.add("-Xexplicit-backing-fields")
-//        freeCompilerArgs.addAll(Config.jvm.freeCompilerArgs)
-//      }
-//    }
   }
 
   dependencies {

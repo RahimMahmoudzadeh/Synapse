@@ -6,7 +6,6 @@ import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.gradle.LibraryExtension
 import config.Config
 import configureKotlinAndroid
-import convention.configureFlavors
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
@@ -30,7 +29,6 @@ class ApplicationConventionPlugin : Plugin<Project> {
           namespace = Config.android.applicationId
         }
         configureKotlinAndroid(this)
-        configureFlavors(this)
       }
       dependencies {
 

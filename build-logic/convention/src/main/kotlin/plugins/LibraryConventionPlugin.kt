@@ -2,10 +2,7 @@ package plugins
 
 import androidGradle
 import applyPlugins
-import com.android.build.api.dsl.ApplicationExtension
-import com.android.build.api.dsl.LibraryExtension
 import configureKotlinAndroid
-import convention.configureFlavors
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import versionCatalog
@@ -21,7 +18,6 @@ class LibraryConventionPlugin : Plugin<Project> {
       }
       androidGradle {
         configureKotlinAndroid(this)
-        configureFlavors(this)
       }
     }
   }

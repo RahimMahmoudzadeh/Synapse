@@ -4,8 +4,8 @@ plugins {
     }
 }
 
-android {
-    namespace = "ir.rahim.login.domain"
-}
-dependencies {
-}
+//android {
+//    namespace = "ir.rahim.login.domain"
+//}
+//dependencies {
+//}

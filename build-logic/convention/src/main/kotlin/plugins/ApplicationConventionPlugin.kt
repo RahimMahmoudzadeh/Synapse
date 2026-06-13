@@ -12,33 +12,37 @@ import org.gradle.kotlin.dsl.dependencies
 import versionCatalog
 
 class ApplicationConventionPlugin : Plugin<Project> {
-  override fun apply(target: Project) {
-    with(target) {
-      applyPlugins {
-        listOf(
-          "com.android.application",
-          versionCatalog.findPlugin("kotlin-parcelize").get().get().pluginId,
-        )
-      }
-      applicationGradle {
-        defaultConfig.apply {
-          targetSdk = Config.android.targetSdkVersion
-          applicationId = Config.android.applicationId
-          versionCode = Config.android.versionCode
-          versionName = Config.android.versionName
-          namespace = Config.android.applicationId
+    override fun apply(target: Project) {
+        with(target) {
+            applyPlugins {
+                listOf(
+                    "com.android.application",
+                    versionCatalog.findPlugin("kotlin-parcelize").get().get().pluginId,
+                )
+            }
+            applicationGradle {
+                defaultConfig.apply {
+                    targetSdk = Config.android.targetSdkVersion
+                    applicationId = Config.android.applicationId
+                    versionCode = Config.android.versionCode
+                    versionName = Config.android.versionName
+                    namespace = Config.android.nameSpace
+                }
+                configureKotlinAndroid(this)
+            }
+            dependencies {
+
+                val subprojects = project
+                    .rootProject
+                    .subprojects
+
+                add("implementation", project(":shared"))
+                add("implementation", versionCatalog.findBundle("compose-x").get())
+                add("implementation", versionCatalog.findBundle("navigation").get())
+
+                subprojects.filter { it.path.startsWith(":library:", false) }
+                    .forEach { add("implementation", project(it.path)) }
+            }
         }
-        configureKotlinAndroid(this)
-      }
-      dependencies {
-
-        val subprojects = project
-          .rootProject
-          .subprojects
-
-        subprojects.filter { it.path.startsWith(":library:", false) }
-          .forEach { add("implementation", project(it.path)) }
-      }
     }
-  }
 }

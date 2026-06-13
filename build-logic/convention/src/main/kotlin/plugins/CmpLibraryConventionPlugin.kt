@@ -1,8 +1,8 @@
 package plugins
 
-import com.android.build.api.dsl.LibraryExtension
+import applyPlugins
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 import config.Config
-import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.internal.Actions.with
@@ -13,22 +13,27 @@ import versionCatalog
 class CmpLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            with(pluginManager) {
-                apply(versionCatalog.findPlugin("kotlin.multiplatform").get().get().pluginId)
-                apply(
+            applyPlugins {
+                listOf(
+                    versionCatalog.findPlugin("kotlin.multiplatform").get().get().pluginId,
                     versionCatalog.findPlugin("android.kotlin.multiplatform.library").get()
-                        .get().pluginId
+                        .get().pluginId,
+//                    versionCatalog.findPlugin("kotlinx.serialization").get().get().pluginId
                 )
-                apply(versionCatalog.findPlugin("kotlinx.serialization").get().get().pluginId)
             }
-            extensions.configure<KotlinMultiplatformExtension> {
-                androidTarget {
-                    compilerOptions {
-                        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
-                    }
-                }
 
-                iosX64()
+            extensions.configure<KotlinMultiplatformExtension> {
+
+                targets.withType(KotlinMultiplatformAndroidLibraryTarget::class.java)
+                    .configureEach {
+                        compileSdk = Config.android.compileSdkVersion
+                        minSdk = Config.android.minSdkVersion
+                        namespace = Config.android.nameSpace+"shared"
+                        compilerOptions {
+                            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+                        }
+                    }
+
                 iosArm64()
                 iosSimulatorArm64()
 
@@ -36,21 +41,19 @@ class CmpLibraryConventionPlugin : Plugin<Project> {
 
                 sourceSets.apply {
                     commonMain.dependencies {
-                        implementation(versionCatalog.findLibrary("kotlin-stdlib"))
+                        val subprojects = project
+                            .rootProject
+                            .subprojects
+                        subprojects.filter { it.path.startsWith(":library:", false) }
+                            .forEach {
+                                implementation(project(it.path))
+                            }
+//                        implementation(versionCatalog.findBundle("compose"))
+//                        implementation(versionCatalog.findLibrary("kotlinx-serialization"))
+//                        implementation(versionCatalog.findLibrary("kotlin-stdlib"))
                     }
                     androidMain.dependencies {
                     }
-                }
-            }
-
-            extensions.configure<LibraryExtension> {
-                compileSdk = Config.android.compileSdkVersion
-                defaultConfig {
-                    minSdk = Config.android.minSdkVersion
-                }
-                compileOptions {
-                    sourceCompatibility = JavaVersion.VERSION_17
-                    targetCompatibility = JavaVersion.VERSION_17
                 }
             }
         }

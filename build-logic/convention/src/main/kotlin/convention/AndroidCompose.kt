@@ -22,8 +22,7 @@ internal fun Project.configureAndroidCompose(commonExtension: ApplicationExtensi
         }
 
         dependencies {
-//            val compose = versionCatalog.findBundle("compose").get()
-//            add("implementation", compose)
+            add("implementation", versionCatalog.findBundle("compose-x").get())
         }
 
         testOptions {

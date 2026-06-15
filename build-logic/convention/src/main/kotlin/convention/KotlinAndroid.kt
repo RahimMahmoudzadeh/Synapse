@@ -51,7 +51,8 @@ internal fun Project.configureComposeMultiPlatform() {
 
         sourceSets {
             commonMain.dependencies {
-
+                val compose = versionCatalog.findBundle("compose").get()
+                implementation(compose)
             }
             iosMain.dependencies {}
 
@@ -77,8 +78,6 @@ internal fun Project.configureComposeMultiPlatformPresentation() {
 
         sourceSets {
             commonMain.dependencies {
-                val compose = versionCatalog.findBundle("compose").get()
-                implementation(compose)
                 implementation(  project(":library:designsystem"))
                 implementation(  project(":library:navigation"))
             }

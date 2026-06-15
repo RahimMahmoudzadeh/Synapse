@@ -37,7 +37,6 @@ class ApplicationConventionPlugin : Plugin<Project> {
                     .subprojects
 
                 add("implementation", project(":shared"))
-                add("implementation", versionCatalog.findBundle("compose-x").get())
                 add("implementation", versionCatalog.findBundle("navigation").get())
 
                 subprojects.filter { it.path.startsWith(":library:", false) }

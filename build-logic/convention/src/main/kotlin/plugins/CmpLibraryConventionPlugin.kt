@@ -18,7 +18,7 @@ class CmpLibraryConventionPlugin : Plugin<Project> {
                     versionCatalog.findPlugin("kotlin.multiplatform").get().get().pluginId,
                     versionCatalog.findPlugin("android.kotlin.multiplatform.library").get()
                         .get().pluginId,
-//                    versionCatalog.findPlugin("kotlinx.serialization").get().get().pluginId
+                    versionCatalog.findPlugin("kotlinx.serialization").get().get().pluginId
                 )
             }
 
@@ -48,9 +48,8 @@ class CmpLibraryConventionPlugin : Plugin<Project> {
                             .forEach {
                                 implementation(project(it.path))
                             }
-//                        implementation(versionCatalog.findBundle("compose"))
-//                        implementation(versionCatalog.findLibrary("kotlinx-serialization"))
-//                        implementation(versionCatalog.findLibrary("kotlin-stdlib"))
+                        implementation(versionCatalog.findBundle("compose").get())
+                        implementation(versionCatalog.findLibrary("kotlinx-serialization").get())
                     }
                     androidMain.dependencies {
                     }

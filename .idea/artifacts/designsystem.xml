@@ -1,6 +1,8 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="designsystem">
     <output-path>$PROJECT_DIR$/library/designsystem/build/libs</output-path>
-    <root id="archive" name="designsystem.jar" />
+    <root id="archive" name="designsystem.jar">
+      <element id="module-output" name="Synapse.library.designsystem.androidMain" />
+    </root>
   </artifact>
 </component>

@@ -6,6 +6,7 @@ import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 import config.Config
 import configureComposeMultiPlatform
 import configureKotlinAndroid
+import configureMultiPlatform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -24,7 +25,7 @@ class LibraryConventionPlugin : Plugin<Project> {
                         .get().pluginId,
                 )
             }
-            configureComposeMultiPlatform()
+            configureMultiPlatform()
         }
     }
 }

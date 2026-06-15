@@ -59,6 +59,32 @@ internal fun Project.configureComposeMultiPlatform() {
         }
     }
 }
+internal fun Project.configureMultiPlatform() {
+    extensions.configure<KotlinMultiplatformExtension> {
+
+        targets.withType(KotlinMultiplatformAndroidLibraryTarget::class.java)
+            .configureEach {
+                compileSdk = Config.android.compileSdkVersion
+                minSdk = Config.android.minSdkVersion
+                val formattedPath = project.path.replace(":", ".").replace("-", "_")
+                namespace = Config.android.nameSpace+formattedPath
+                compilerOptions {
+                    jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+                }
+            }
+
+        iosArm64()
+        iosSimulatorArm64()
+
+        sourceSets {
+            commonMain.dependencies {
+
+            }
+            iosMain.dependencies {}
+
+        }
+    }
+}
 internal fun Project.configureComposeMultiPlatformPresentation() {
     extensions.configure<KotlinMultiplatformExtension> {
 
